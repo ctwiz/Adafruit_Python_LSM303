@@ -86,7 +86,7 @@ class LSM303(object):
         # Read the magnetometer.
         mag_raw = self._mag.readList(LSM303_REGISTER_MAG_OUT_X_H_M, 6)
         # mag = struct.unpack('>hhh', mag_raw)
-        mag = [(mag_raw[1] << 8) & mag_raw[0], (mag_raw[3] << 8) & mag_raw[2], (mag_raw[5] << 8) & mag_raw[4]]
+        mag = [(mag_raw[1] << 8) | mag_raw[0], (mag_raw[3] << 8) | mag_raw[2], (mag_raw[5] << 8) | mag_raw[4]]
         return (accel, mag)
 
     def set_mag_gain(self,gain=LSM303_MAGGAIN_1_3):
